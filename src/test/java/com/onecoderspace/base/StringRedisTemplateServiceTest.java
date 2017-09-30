@@ -9,8 +9,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.onecoderspace.base.domain.Role;
+import com.onecoderspace.base.domain.User;
+import com.onecoderspace.base.util.JacksonHelper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes=BaseApplication.class)
@@ -44,10 +49,27 @@ public class StringRedisTemplateServiceTest {
 		for (String string : list) {
 			System.err.println(string);
 		}
+		
+		User user = new User();
+		user.setId(1);
+		user.setName("test");
+		objRedisTemplate.opsForValue().set("user", user,10,TimeUnit.SECONDS);
+		user = (User) objRedisTemplate.opsForValue().get("user");
+		System.err.println(JacksonHelper.toJson(user));
+		
+		Role role = new Role();
+		role.setId(1);
+		role.setName("role");
+		objRedisTemplate.opsForValue().set("role", role,10,TimeUnit.SECONDS);
+		role = (Role) objRedisTemplate.opsForValue().get("role");
+		System.err.println(JacksonHelper.toJson(role));
 	}
 	
 	@Autowired
 	private StringRedisTemplate redisTemplate;
+	
+	@Autowired
+	private RedisTemplate<String, Object> objRedisTemplate;
 	
 }
 
