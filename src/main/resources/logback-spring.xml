@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
+
+<configuration scan="true" scanPeriod="30 seconds">
+    <property name="LOG_PATH" value="../logs"/>
+
+	<springProfile name="local">
+		<logger name="com.hexun" level="debug" additivity="true"/>
+        <appender name="logfile" class="ch.qos.logback.core.ConsoleAppender">
+			<encoder>
+				<pattern>%d{yyyy-MM-dd HH:mm:ssS} %5p [%c]:%L-%m%n</pattern>
+			</encoder>
+		</appender>
+    </springProfile>
+
+    <springProfile name="dev">
+    	<logger name="com.onecoderspace" level="info" additivity="true"/>
+        <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>${LOG_PATH}/rest-base/rest-base_dev.log</file>
+			<append>true</append>
+			<encoder>
+				<pattern>%d{yyyy-MM-dd HH:mm:ssS} %5p [%c{5}#%M]:%L-%m%n%caller{0}</pattern>
+			</encoder>
+			<prudent>false</prudent>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<!-- daily rollover -->
+				<fileNamePattern>${LOG_PATH}/rest-base/rest-base_dev.%d{yyyy-MM-dd}.log.gz
+				</fileNamePattern>
+				<maxHistory>30</maxHistory>
+			</rollingPolicy>
+		</appender>
+    </springProfile>
+    
+    <springProfile name="prod">
+    	<logger name="com.onecoderspace" level="info" additivity="true"/>
+        <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>${LOG_PATH}/rest-base/rest-base.log</file>
+			<append>true</append>
+			<encoder>
+				<pattern>%d{yyyy-MM-dd HH:mm:ssS} %5p [%c{5}#%M]:%L-%m%n%caller{0}</pattern>
+			</encoder>
+			<prudent>false</prudent>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<!-- daily rollover -->
+				<fileNamePattern>${LOG_PATH}/rest-base/rest-base.%d{yyyy-MM-dd}.log.gz
+				</fileNamePattern>
+				<maxHistory>30</maxHistory>
+			</rollingPolicy>
+		</appender>
+    </springProfile>
+	
+	<root level="info">
+		<appender-ref ref="logfile" />
+	</root>
+	
+</configuration>
