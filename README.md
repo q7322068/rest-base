@@ -9,7 +9,7 @@
 5. 访问http://localhost:8070/admin/user/list测试接口；
 
 # 个人博客
-http://www.onecoderspace.com
+<a href="http://www.onecoderspace.com" target="_blank">http://www.onecoderspace.com</a>
 
 # 简书博客
 http://www.jianshu.com/u/1182bf416662
