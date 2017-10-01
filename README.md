@@ -7,3 +7,12 @@
 3. 访问http://localhost:8070/login/submit?username=admin&pwd=admin2017进行登录
 4. 访问http://localhost:8070/swagger-ui.html查看接口文档；
 5. 访问http://localhost:8070/admin/user/list测试接口；
+
+# 个人博客
+http://www.onecoderspace.com
+
+# 简书博客
+http://www.jianshu.com/u/1182bf416662
+
+# csdn博客
+http://blog.csdn.net/u014411966
