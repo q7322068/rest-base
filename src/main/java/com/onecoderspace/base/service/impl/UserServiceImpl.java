@@ -14,7 +14,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,6 +112,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 		entity.setUpdator(currentUid);
 		entity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 		userDao.save(entity);
+		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "updateTime"));
+		Page<User> page = userDao.findAll(pageable);
 		
 		return Return.success();
 	}

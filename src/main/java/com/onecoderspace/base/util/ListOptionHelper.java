@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 public class ListOptionHelper {
@@ -24,8 +25,8 @@ public class ListOptionHelper {
 	 * @return
 	 */
     public static List<String> getDiffList(Collection<String> first, Collection<String> second) {  
-    	long t = System.currentTimeMillis();
-    	Set<String> sameString = new HashSet<String>(second);
+	    	long t = System.currentTimeMillis();
+	    	Set<String> sameString = new HashSet<String>(second);
         List<String> result = new ArrayList<String>(first.size());  
         for (String s : first) { 
             if (!sameString.contains(s)) {  
@@ -33,8 +34,9 @@ public class ListOptionHelper {
             }  
         }  
         if(System.currentTimeMillis() - t > 1){
-        	logger.debug("getDiffList with list first.size={},sencond.size={},use time={}ms",first.size(),second.size(),System.currentTimeMillis()-t);
+        		logger.debug("getDiffList with list first.size={},sencond.size={},use time={}ms",first.size(),second.size(),System.currentTimeMillis()-t);
         }
+        
         return result;  
     }  
     
@@ -45,9 +47,9 @@ public class ListOptionHelper {
      * @param list2
      * @return
      */
-    public static List<String> getSameElements(List<String> list, List<String> list2) {
-    	long t = System.nanoTime();
-    	Set<String> set = new HashSet<String>(list2);
+    public static List<String> getSameElements(Collection<String> list, Collection<String> list2) {
+	    	long t = System.nanoTime();
+	    	Set<String> set = new HashSet<String>(list2);
 		List<String> sameElements = new ArrayList<String>(list.size());  
 		for(String item : list){
 			if(set.contains(item)){
@@ -55,7 +57,7 @@ public class ListOptionHelper {
 			}
 		}
 		if(logger.isDebugEnabled()){
-        	logger.debug("getSameElements list.size={},list2.size={},use time={}ns",list.size(),list2.size(),System.nanoTime()-t);
+			logger.debug("getSameElements list.size={},list2.size={},use time={}ns",list.size(),list2.size(),System.nanoTime()-t);
         }
 		return sameElements;
 	}

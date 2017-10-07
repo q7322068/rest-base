@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
   
 /** 
- * 拦截防止sql注入、xss注入
+ * 拦截防止xss注入
  * 通过Jsoup过滤请求参数内的特定字符
  * @author yangwk 
  */  

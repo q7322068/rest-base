@@ -23,8 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
   
 /** 
- * 拦截防止sql注入、xss注入
- * 通过Jsoup过滤请求参数内的特定字符
+ * 通过拦截器设置shiroSession过期时间
  * @author yangwk 
  */  
 public class ShiroSessionFilter implements Filter {  

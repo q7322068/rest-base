@@ -25,6 +25,15 @@ public class DateUtils {
 		return getDay(date, num,DATE_FORMAT_DEFAULT);
 	}
 	
+	/**
+	 * 获取指定日期前后num天的日期
+	 * @author yangwk
+	 * @time 2017年9月14日 上午11:13:18
+	 * @param date
+	 * @param num 正数 多少天之后的日期  负数 多少天之后的日期
+	 * @param format 日期格式
+	 * @return
+	 */
 	public static String getDay(String date,int num,String format){
 		long t = parseStringToLong(date);
 		return getDay(t, num, DATE_FORMAT_DEFAULT);
@@ -42,6 +51,15 @@ public class DateUtils {
 		return getDay(date, num, DATE_FORMAT_DEFAULT);
 	}
 	
+	/**
+	 * 获取指定日期前后num天的日期
+	 * @author yangwk
+	 * @time 2017年9月14日 上午11:13:18
+	 * @param date
+	 * @param num 正数 多少天之后的日期  负数 多少天之后的日期
+	 * @param format 日期格式
+	 * @return
+	 */
 	public static String getDay(long date,int num,String format){
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(date);
@@ -49,21 +67,39 @@ public class DateUtils {
 		return longToString(calendar.getTimeInMillis(),format);
 	}
 
+	/**
+	 * 将毫秒时间转换为yyyy-MM-dd格式的时间
+	 * @author yangwenkui
+	 * @time 2017年10月6日 下午5:56:40
+	 * @param time 毫秒数
+	 * @return
+	 */
 	public static String longToString(long time) {
-
 		return longToString(time, DATE_FORMAT_DEFAULT);
-
 	}
 
+	/**
+	 * 将毫秒时间转换为指定格式的时间
+	 * @author yangwenkui
+	 * @time 2017年10月6日 下午5:56:40
+	 * @param time 毫秒数
+	 * @param format 日期格式
+	 * @return
+	 */
 	public static String longToString(long time, String format) {
 		if (StringUtils.isBlank(format)) {
 			format = DATE_FORMAT_DEFAULT;
 		}
 		DateTime dTime = new DateTime(time);
 		return dTime.toString(format);
-
 	}
 
+	/**
+	 * 获取今天开始的时间
+	 * @author yangwenkui
+	 * @time 2017年10月6日 下午5:58:18
+	 * @return
+	 */
 	public static Timestamp getTodayStartTime() {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -73,6 +109,13 @@ public class DateUtils {
 		return new Timestamp(cal.getTimeInMillis());
 	}
 	
+	/**
+	 * 获取指定日期开始的当日开始时间
+	 * @author yangwenkui
+	 * @time 2017年10月6日 下午5:58:33
+	 * @param date
+	 * @return
+	 */
 	public static long getDayStartTime(String date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(parseStringToLong(date));
@@ -83,6 +126,13 @@ public class DateUtils {
 		return cal.getTimeInMillis();
 	}
 	
+	/**
+	 * 获取指定日期结束时间
+	 * @author yangwenkui
+	 * @time 2017年10月6日 下午5:58:58
+	 * @param date
+	 * @return
+	 */
 	public static long getDayEndTime(String date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(parseStringToLong(date));
@@ -94,19 +144,7 @@ public class DateUtils {
 	}
 
 	/**
-	 * 获得现在年份
-	 * 
-	 * @param format
-	 * @return
-	 */
-	public static String getCurrentYear() {
-		return getCurrentYear(DATE_FORMAT_DEFAULT);
-	}
-
-	/**
 	 * 获得当前日期
-	 * 
-	 * @return
 	 */
 	public static String getCurrentTime() {
 		return getCurrentTime("yyyy-MM-dd");
@@ -114,8 +152,7 @@ public class DateUtils {
 
 	/**
 	 * 获得当前时间
-	 * 
-	 * @param format
+	 * @param format 日期格式
 	 * @return
 	 */
 	public static String getCurrentTime(String format) {
@@ -124,34 +161,12 @@ public class DateUtils {
 	}
 
 	/**
-	 * 获得当前学年
-	 * 
-	 * @param format
+	 * 将字符串类型的日期转换为毫秒数
+	 * @author yangwenkui
+	 * @time 2017年10月6日 下午6:00:27
+	 * @param dateStr
 	 * @return
 	 */
-	public static String getCurrentYear(String format) {
-		DateTime dTime = new DateTime(new DateTime().getYear(), 1, 1, 0, 0);
-		return dTime.toString(format);
-	}
-
-	/**
-	 * 获取证书有效截止时间 延后10年
-	 * 
-	 * @author hl
-	 * @time 2017年4月21日 下午3:36:21
-	 * @param data
-	 *            证书开始时间
-	 * @return
-	 */
-	public static String getTenYears(String data) {
-		Calendar c = Calendar.getInstance();
-		c.set(Integer.parseInt(data.substring(0, 4)) + 10,
-				Integer.parseInt(data.substring(5, 7)) - 1,
-				Integer.parseInt(data.substring(8, 10)));
-		long oneday = 24 * 3600 * 1000;
-		return longToString(c.getTime().getTime() - oneday, DATE_CHINA_DEFAULT);
-	}
-
 	public static long parseStringToLong(String dateStr) {
 		dateStr = dateStr.trim();
 		if (dateStr.length() == 19 || dateStr.length() == 23) {

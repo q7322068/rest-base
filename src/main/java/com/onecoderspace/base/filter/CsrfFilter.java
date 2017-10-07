@@ -41,7 +41,7 @@ public class CsrfFilter implements Filter {
   			filterChain.doFilter(request, response);
   			return ;
   		}
-    	if(logger.isDebugEnabled()){
+  		if(logger.isDebugEnabled()){
   			logger.debug("csrf filter is running");
   		}
   		

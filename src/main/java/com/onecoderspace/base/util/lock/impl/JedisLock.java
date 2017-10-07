@@ -70,7 +70,7 @@ public class JedisLock implements DistributedLock{
     public synchronized boolean acquire() {
         int timeout = timeoutMsecs;
         if(redisTemplate == null){
-        	redisTemplate = SpringContextUtil.getBean(StringRedisTemplate.class);
+        		redisTemplate = SpringContextUtil.getBean(StringRedisTemplate.class);
 		}
         try {
 			while (timeout >= 0) {
@@ -111,13 +111,17 @@ public class JedisLock implements DistributedLock{
      * 释放锁
      */
     public synchronized void release() {
-    	if(redisTemplate == null){
+    		if(redisTemplate == null){
          	redisTemplate = SpringContextUtil.getBean(StringRedisTemplate.class);
  		}
 		try {
 		    if (locked) {
-		    	redisTemplate.delete(lockKey);;
-				locked = false;
+		    		String currentValueStr = redisTemplate.opsForValue().get(lockKey); //redis里的时间
+		    		//校验是否超过有效期，如果不在有效期内，那说明当前锁已经失效，不能进行删除锁操作
+			    if (currentValueStr != null && Long.parseLong(currentValueStr) > System.currentTimeMillis()) {
+			    		redisTemplate.delete(lockKey);
+					locked = false;
+			    }
 		    }
 		} catch (Exception e) {
 			logger.error("release lock due to error",e);

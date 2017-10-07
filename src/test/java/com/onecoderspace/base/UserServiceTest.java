@@ -23,13 +23,13 @@ public class UserServiceTest {
 
 	@Test
 	public void listByPage(){
-//		Map<String, String> params = Maps.newHashMap();
-//		params.put("type", "0");
-//		params.put("status", "1");
-//		params.put("username", "te");
-//		params.put("name", "");
-//		Page<User> page = userService.listByPage(params, new PageRequest(0, 10));	
-//		System.err.println(JacksonHelper.toJson(page));
+		Map<String, String> params = Maps.newHashMap();
+		params.put("type", "0");
+		params.put("status", "1");
+		params.put("username", "te");
+		params.put("name", "");
+		Page<User> page = userService.listByPage(params, new PageRequest(0, 10));	
+		System.err.println(JacksonHelper.toJson(page));
 		
 		List<User> list = userService.findAll();
 		System.err.println(JacksonHelper.toJson(list));
@@ -43,7 +43,7 @@ public class UserServiceTest {
 		list = userService.list(params2);
 		System.err.println(JacksonHelper.toJson(list));
 		
-		Page<User> page = userService.list(params2, new PageRequest(0, 10));
+		page = userService.list(params2, new PageRequest(0, 10));
 		System.err.println(JacksonHelper.toJson(page));
 		
 	}
