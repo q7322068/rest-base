@@ -8,6 +8,19 @@
 4. 访问http://localhost:8070/swagger-ui.html查看接口文档；
 5. 访问http://localhost:8070/admin/user/list测试接口；
 
+# redis安装方式
+$ wget http://download.redis.io/releases/redis-4.0.2.tar.gz
+$ tar xzf redis-4.0.2.tar.gz
+$ cd redis-4.0.2
+$ make
+
+修改Redis配置文件redis.conf，改变配置：
+daemonize yes
+requirepass test!@#$%
+
+$ src/redis-server
+src/redis-cli
+
 # 个人博客
 <a href="http://www.onecoderspace.com" target="_blank">http://www.onecoderspace.com</a>
 
