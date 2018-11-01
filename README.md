@@ -21,8 +21,6 @@ requirepass test!@#$%
 $ src/redis-server  
 src/redis-cli  
 
-# 个人博客
-<a href="http://www.onecoderspace.com" target="_blank">http://www.onecoderspace.com</a>
 
 # 简书博客
 http://www.jianshu.com/u/1182bf416662
